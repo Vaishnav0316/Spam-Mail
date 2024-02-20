@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <form action="{% url 'addAction' %}" method="post">
+        {% csrf_token %}
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#hobby").change(function(){
+                    var hid=$("#hobby").val();
+                    $.ajax({
+                        url:"{% url 'getfactor' %}",
+                        data:{'h':hid},
+                        success:function(data){
+                            $("#factor").html(data)
+            
+                        }
+            
+                    })
+                })
+            
+            })
+        </script>
+        <div class="navbar navbar-expand-lg bg-info ">
+            <a hre="#" class="navbar-brand">MY WEBSITE</a>
+            <ul class="navbar-nav">
+                <li class="nav nav-item">
+                    <a class="nav-link" href="{% url 'home_user' %}">HOME</a>        
+                </li>
+    
+                <li class="nav nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+        <table>
+            <h3 class="text-primary";>ADD CUSTOMER HOBBY</h3>
+            <tr>
+                <th>HOBBY</th>
+                <td><select name="hobby" class="form-control" id="hobby">
+                    <option value="">--select--</option>
+                    {% for v in h %}
+                    <option value="{{v.id}}">{{v.Hobbyname}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <th>FACTOR</th>
+                <td>
+                    <select name="factor" class="form-control" id="factor">
+                    <option value="">--select--</option>
+                    </select>
+                    </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit"class="btn btn-danger" value="ADD"></td>
+            </tr>
+        </table>
+    </body>
+</html>

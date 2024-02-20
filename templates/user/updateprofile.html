@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <form method="post" action="{% url 'updateAction' %}">
+        {% csrf_token %}
+        <div class="navbar navbar-expand-lg bg-info ">
+            <a hre="#" class="navbar-brand">MY WEBSITE</a>
+            <ul class="navbar-nav">
+                <li class="nav nav-item">
+                    <a class="nav-link" href="{% url 'home_user' %}">HOME</a>        
+                </li>
+    
+                <li class="nav nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#country").change(function(){
+                    var cid=$("#country").val();
+                    $.ajax({
+                        url:"{% url 'getstate' %}",
+                        data:{'co':cid},
+                        success:function(data){
+                            $("#state").html(data)
+            
+                        }
+            
+                    })
+                })
+            
+            })
+        </script>
+        <table>
+            {% for v in us %}
+            <tr>
+                <th>Name</th>
+                <td><input type="text" name="name" class="form-control" value="{{v.Name}}"></td>
+            </tr>
+            <tr>
+                <th>GENDER</th>
+                <td>
+                {% if v.Gender == 'Male' %}
+                    <input type="radio" name="gender" class="form-check-input" checked="true" value="male">Male
+                    <input type="radio" name="gender" class="form-check-input" value="female">Female</td>
+                {% else %}
+                    <input type="radio" name="gender" class="form-check-input" value="male">Male
+                    <input type="radio" name="gender" class="form-check-input" checked="true"  value="female">Female</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <th>DOB</th>
+                <td><input type="date" name="DOB" class="form-control" value="{{v.DOB}}"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name="address" class="form-control" cols="20" rows="5" >{{v.Address}}</textarea></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td><select name="country" class="form-control" id="country">
+                    <option value="{{v.Countryid.id}}">{{v.Countryid.Country}}</option>
+                    {% for c in co %}
+                    <option value="{{c.id}}">{{c.Country}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>
+                    <select name="state" id="state" class="form-control">
+                    <option value="{{v.Stateid.id}}">{{v.Stateid.State}}</option>
+                    </select>
+                    </td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><input type="text" class="form-control" class="form-control" name="phone" value="{{v.Phone}}"></td>
+            </tr>
+            <tr>
+                <th>Hobbies</th>
+                
+                    {% for h in ho %}
+                    <td><input type="checkbox" class="form-check-input" name="hobby" value="{{h.id}}"
+                        {% for u in uho %}
+                    {% if u.Hobbyid.id == h.id %}
+                    checked="true"
+                    {% endif %}
+                    {% endfor %}
+                        
+                        >{{h.Hobbyname}}</td>
+                    {% endfor %}        
+            </tr>
+            <tr>
+                <th>Security Question</th>
+                <td>
+                    <select name="question" class="form-control" >
+                    <option value="{{v.SecurityQuestion}}">{{v.SecurityQuestion}}</option>
+                    <option value="Nickname">Nickname</option>
+                    <option value="Name of your pet">Name of your pet</option>
+                    <option value="Your Fav book">Your Fav book</option>
+                    </select>
+                    </td>
+            </tr>
+            
+            <tr>
+                <th>Answer</th>
+                <td><input type="text" class="form-control" name="answer" value="{{v.Answer}}"></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" class="form-control" name="username" value="{{v.Username}}"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" class="form-control" name="password" value="{{v.Password}}"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" class="btn btn-info" value="UPDATE"></td>
+            </tr>
+        </table>
+        {% endfor %}
+        </form>
+    </body>
+</html>
+{% if messages %}
+{% for msg in messages%}
+<script>
+alert('{{msg}}')
+</script>
+{% endfor %}
+{% endif%}

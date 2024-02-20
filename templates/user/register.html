@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <form method="post" action="{% url 'registerAction' %}">
+        {% csrf_token %}
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#country").change(function(){
+                    var cid=$("#country").val();
+                    $.ajax({
+                        url:"{% url 'getstate' %}",
+                        data:{'co':cid},
+                        success:function(data){
+                            $("#state").html(data)
+            
+                        }
+            
+                    })
+                })
+            
+            })
+        </script>
+        <table>
+            <h1 class="text-primary">USER REGISTRATION</h1>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" class="form-control" name="name" ></td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>
+                    <input type="radio" name="gender" class="form-check-input" value="Male">Male
+                    <input type="radio" name="gender" class="form-check-input" value="Female">Female
+                </td>
+            </tr>
+            <tr>
+                <th>DOB</th>
+                <td><input type="date" class="form-control" name="DOB"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name="address" class="form-control" cols="20" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td><select name="country" id="country" class="form-control">
+                    <option value="">--select--</option>
+                    {% for v in co %}
+                    <option value="{{v.id}}">{{v.Country}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>
+                    <select name="state" id="state" class="form-control">
+                    <option value="">--select--</option>
+                    </select>
+                    </td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><input type="text" name="phone" class="form-control"></td>
+            </tr>
+            <tr>
+                <th>Hobbies</th>
+                
+                {% for a in ho %}
+                <td><input type="checkbox" class="form-check-input" name="hobby" value="{{a.id}}">{{a.Hobbyname}}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Security Question</th>
+                <td>
+                    <select name="question" class="form-control">
+                    <option value="">--select--</option>
+                    <option value="Nickname">Nickname</option>
+                    <option value="Name of your pet">Name of your pet</option>
+                    <option value="Your Fav book">Your Fav book</option>
+                    </select>
+                    </td>
+            </tr>
+            
+            <tr>
+                <th>Answer</th>
+                <td><input type="text" name="answer" class="form-control" ></td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td><input type="text" name="username" class="form-control"></td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td><input type="password" name="password"class="form-control"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" value="REGISTER" class="btn btn-danger"></td>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>
+{% if messages %}
+{% for msg in messages%}
+<script>
+alert('{{msg}}')
+</script>
+{% endfor %}
+{% endif%}

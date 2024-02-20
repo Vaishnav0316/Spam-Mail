@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 20px;">
+        <h3 class="text-primary";>WELCOME ADMIN</h3>
+<li><a href="{% url 'addhobby' %}">ADD HOBBY</a></li>
+<li><a href="{% url 'addhobbyfactor' %}">ADD HOBBY FACTOR</a></li>
+<li><a href="{% url 'addseason' %}">ADD SEASON</a></li>
+<li><a href="{% url 'addseasonfactor' %}">ADD SEASON FACTOR</a></li>
+<li><a href="{% url 'addseasoncountry' %}">ADD SEASON COUNTRY</a></li>
+<li><a href="{% url 'addagefactor' %}">ADD AGE FACTOR</a></li>
+<li><a href="{% url 'logout' %}">LOGOUT</a></li>
+
+{% if messages %}
+{% for msg in messages%}
+<script>
+alert('{{msg}}')
+</script>
+{% endfor %}
+{% endif%}

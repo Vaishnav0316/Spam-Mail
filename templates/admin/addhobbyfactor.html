@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <table>
+            <form action="{%url 'saveAction' %}" method="post">
+            {% csrf_token %}
+            <tr>
+                <th>HOBBY</th>   
+                <td><select name="hobby" class="form-control"id="hobby">
+                    <option value="">--select--</option>
+                    {% for v in ho %}
+                    <option value="{{v.id}}">{{v.Hobbyname}}</option>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>HOBBY FACTOR</th>
+                <td>
+                    <input type="text" class="form-control" name="hobbyfactor">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" class="btn btn-danger" name="SAVE"></td>
+            </tr>
+            </form>
+        </table>
+    </body>
+</html>

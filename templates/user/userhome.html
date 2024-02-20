@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding-left: 25px;">
+
+<h1>WELCOME USER</h1>
+<li><a href="{% url 'sendmessage' %}">SEND MESSAGE</a></li>
+<li><a href="{% url 'viewSentmessage' %}">VIEW SENT MESSAGE</a></li>
+<li><a href="{% url 'viewReceivedmessage' %}">VIEW RECEIVED MESSAGE</a></li>
+<li><a href="{% url 'viewTrash' %}">VIEW TRASH</a></li>
+<li><a href="{% url 'addcontact' %}">ADD CONTACT</a></li>
+<li><a href="{% url 'blocklist' %}">CREATE BLOCKLIST</a></li>
+<li><a href="{% url 'viewcontact' %}">VIEW CONTACT</a></li>
+<li><a href="{% url 'viewblocklist' %}">VIEW BLOCKLIST</a></li>
+<li><a href="{% url 'addcustomerhobby' %}">ADD CUSTOMER HOBBY</a></li>
+<li><a href="{% url 'addcustomeragefactor' %}">ADD CUSTOMER AGE FACTOR</a></li>
+<li><a href="{% url 'addcustomerseasoncountry' %}">ADD CUSTOMER SEASON COUNTRY</a></li>
+<li><a href="{% url 'viewspam' %}">VIEW SPAM</a></li>
+<li><a href="{% url 'updateprofile' %}">UPDATE PROFILE</a></li>
+<li><a href="{% url 'ResetPassword' %}">RESET PASSWORD</a></li>
+<li><a href="{% url 'logout' %}">LOGOUT</a></li>
+{% if messages %}
+{% for msg in messages%}
+<script>
+alert('{{msg}}')
+</script>
+{% endfor %} 
+{% endif%}

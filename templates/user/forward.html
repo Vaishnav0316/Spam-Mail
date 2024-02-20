@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#r_email").change(function(){
+                    var uname=$("#r_email").val();
+                    $.ajax({
+                        url:"{% url 'checkemail' %}",
+                        data:{'re':uname},
+                        success:function(data){
+                  
+                            if(data.valid == 'notexist')
+                            {
+                                alert("username doesnot exist");
+                                $("#r_email").val();
+                            }
+                        }
+                    })
+                })
+            })
+        </script>
+        <div class="navbar navbar-expand-lg bg-info ">
+            <a hre="#" class="navbar-brand">MY WEBSITE</a>
+            <ul class="navbar-nav">
+                <li class="nav nav-item">
+                    <a class="nav-link" href="{% url 'home_user' %}">HOME</a>        
+                </li>
+    
+                <li class="nav nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
+        <table>
+            <form action="{% url 'forwardAction' %}" method="post">
+            {% csrf_token %}
+            {% for v in m %}
+            <tr>
+                <th>RECEIVER EMAIL</th>
+                <td><input type="text" class="form-control" name="r_email" id="r_email"></td>
+            </tr>
+            <tr>
+                <th>SUBJECT</th>
+                <td><input type="text" class="form-control" name="subject" value={{v.Subject}} id="subject"></td>
+            </tr>
+            <tr>
+                <th>MESSAGE</th>
+                <td><textarea name="msg" class="form-control" cols="20" rows="5">{{v.Message}}</textarea></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit"class="btn btn-danger" value="FORWARD"></td>
+            </tr>
+            {% endfor %}
+        </form>
+        </table>
+    </body>
+</html>
+{% if messages %}
+{% for msg in messages%}
+<script>
+alert('{{msg}}')
+</script>
+{% endfor %}
+{% endif%}

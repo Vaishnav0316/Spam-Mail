@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+    </head>
+    <body style="background-color:rgb(202, 237, 237) ;">
+        <form method="post" action="{% url 'loginAction' %}">
+            {% csrf_token %}
+        <div class="container" style="border: 1px solid silver;padding: 250px;">  
+            <div class="row">
+                <h1 class=" text-primary text-center" style="text-align: center;">LOGIN</h1>
+                <table>
+                    <tr>
+                        <th>USERNAME</th>
+                        <td><input type="text" class="form-control" name="username"></td>
+                    </tr>
+                    <tr>
+                        <th>PASSWORD</th>
+                        <td><input type="password" class="form-control" name="password"></td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td><input type="submit" class="btn btn-info" value="LOGIN"></td>
+                    </tr>
+                </table>
+                <li><a href="{% url 'forgotpswd' %}">FORGOT PASSWORD</a></li>
+            </div>
+        </div>
+        </form>
+        {% if messages %}
+        {% for msg in messages%}
+        <script>
+        alert('{{msg}}')
+        </script>
+        {% endfor %}
+        {% endif%}
+    </body>
+</html>

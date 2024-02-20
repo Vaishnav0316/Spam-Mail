@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <form action="{% url 'AddActionSF' %}" method="post">
+            {% csrf_token %}
+            <div class="navbar navbar-expand-lg bg-info ">
+                <a hre="#" class="navbar-brand">MY WEBSITE</a>
+                <ul class="navbar-nav">
+                    <li class="nav nav-item">
+                        <a class="nav-link" href="{% url 'home_user' %}">HOME</a>        
+                    </li>
+        
+                    <li class="nav nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">LOGOUT</a>
+                    </li>
+                </ul>
+            </div>
+        <table>
+            <h3 class="text-primary";>ADD CUSTOMER SEASON COUNTRY</h3>
+            <tr>
+                <th>FACTOR</th>
+                <td><select name="factor">
+                    <option value="">--select--</option>
+                    {% for v in f %}
+                    <option value="{{v.id}}">{{v.SeasonFactorid.Factorname}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" class="btn btn-danger" value="ADD"></td>
+            </tr>
+            </tr>
+        </table>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <form action="{% url 'addAction_AF' %}" method="post">
+        {% csrf_token %}
+        <table>
+            <h3 class="text-primary";>ADD AGE FACTOR</h3>
+            <tr>
+                <th>MINIMUM AGE</th>
+                <td><input type="text"class="form-control" name="minage" ></td>
+            </tr>
+            <tr>
+                <th>MAXIMUM AGE</th>
+                <td><input type="text"class="form-control" name="maxage"></td>
+            </tr>
+            <tr>
+                <th>FACTOR NAME</th>
+                <td><input type="text"class="form-control" name="factorname"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" class="btn btn-danger" value="ADD"></td>
+            </tr>
+        </table>
+    </form>
+    </body>
+</html>

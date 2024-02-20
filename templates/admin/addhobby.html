@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+        <script src="/static/js/bootstrap.js"></script>
+</head>
+    <body style="background-color: rgb(202, 237, 237);padding: 25px;">
+        <table>
+            <h3 class="text-primary";>ADD HOBBY</h3>
+            <form action="{%url 'SaveAction' %}" method="post">
+            {% csrf_token %}
+            <tr>
+                <th>HOBBY</th>
+                <td><input type="text" class="form-control" name="hobby"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" class="btn btn-danger" name="Save"></td>
+            </tr>
+            </form>
+        </table>
+    </body>
+</html>
